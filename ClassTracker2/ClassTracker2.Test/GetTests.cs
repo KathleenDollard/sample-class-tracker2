@@ -3,6 +3,7 @@ using ClassTracker2.Lib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using Common;
+using System;
 
 namespace ClassTracker2.Test
 {
@@ -16,8 +17,8 @@ namespace ClassTracker2.Test
             var key = 0; // in parameter 
             IResult result = CrudHandler.Get<TeacherDto>(key);
 
-            Assert.AreEqual(result.ValidationIssues.Count(), 1);
-            Assert.AreEqual(result.ValidationIssues.First(), "Key must be greater than zero");
+            Assert.AreEqual(1, result.ValidationIssues.Count());
+            Assert.AreEqual("Key must be greater than zero", result.ValidationIssues.First());
 
         }
 
@@ -31,11 +32,40 @@ namespace ClassTracker2.Test
             Assert.IsTrue(result.ValidationIssues.Count() == 0);
             Assert.IsTrue(result.Exceptions.Count() == 0);
             TeacherDto typedResult = result switch
-                    {
-                         Result<int, TeacherDto> x => x.Output,
-                         _ => default
-                    };
-            Assert.AreEqual(typedResult.FirstName, "Apple");
+            {
+                Result<int, TeacherDto> x => x.Output,
+                _ => default
+            };
+            Assert.AreEqual("Apple", typedResult.FirstName);
+        }
+
+        [TestMethod]
+        public void ZeroSemesterIdFailsValidation()
+        {
+            // Setup - as from controller
+            var key = 0; // in parameter 
+            IResult result = CrudHandler.Get<SemesterDto>(key);
+
+            Assert.AreEqual(1, result.ValidationIssues.Count());
+            Assert.AreEqual("Key must be greater than zero", result.ValidationIssues.First());
+
+        }
+
+        [TestMethod]
+        public void CanGetSemesterById()
+        {
+            // Setup - as from controller
+            var key = 26; // in parameter 
+            IResult result = CrudHandler.Get<SemesterDto>(key);
+
+            Assert.IsTrue(result.ValidationIssues.Count() == 0);
+            Assert.IsTrue(result.Exceptions.Count() == 0);
+            SemesterDto typedResult = result switch
+            {
+                Result<int, SemesterDto> x => x.Output,
+                _ => default
+            };
+            Assert.AreEqual(DateTime.Parse("2019-03-01"), typedResult.StartDate);
+        }
     }
-}
 }

@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace ClassTracker2.Dto
 {
+
     public struct TeacherDto
     {
         private TeacherDto(int id, string firstName, string lastName,
@@ -39,7 +40,7 @@ namespace ClassTracker2.Dto
                     : ImmutableList<CourseSectionDto>.Empty.AddRange(courseSections)
                 );
 
-        public TeacherDto WithResetcourseSections()
+        public TeacherDto WithResetCourseSections()
             => new TeacherDto(
                 Id,
                 FirstName,
@@ -65,7 +66,8 @@ namespace ClassTracker2.Dto
         }
 
         public override int GetHashCode()
-           => Id + ((FirstName?.GetHashCode() * 17) + LastName?.GetHashCode()).GetValueOrDefault();
+           => Id + ((FirstName?.GetHashCode() * 17) + 
+                 LastName?.GetHashCode()).GetValueOrDefault();
         public static bool operator ==(TeacherDto c1, TeacherDto c2)
             => c1.Equals(c2);
         public static bool operator !=(TeacherDto c1, TeacherDto c2)

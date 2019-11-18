@@ -14,10 +14,10 @@ namespace ClassTracker2.Lib
     {
         private readonly TeacherRepo repo = new TeacherRepo();
 
-        public thisResult StartGetById(int key)
+        private thisResult StartGetById(int key)
             => new Result<int, dto>(key);
 
-        public IResult GetById(int key) 
+        public IResult GetById(int key)
             =>
             StartGetById(key)
                 .Validate(Helpers.ValidateKey)
@@ -31,7 +31,7 @@ namespace ClassTracker2.Lib
             {
                 validationIssues.Add(message);
             }
-            if (validationIssues.Count() == 0)
+            if (validationIssues.Any() == false )
             {
                 try
                 {

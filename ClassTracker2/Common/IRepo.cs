@@ -9,5 +9,6 @@ namespace Common
     }
     public interface IRepo<TKey, TDto> : IRepo
     {
+        TDto GetById(TKey key);
     }
 }

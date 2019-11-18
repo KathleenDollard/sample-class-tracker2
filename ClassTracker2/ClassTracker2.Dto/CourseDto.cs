@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Common;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
 namespace ClassTracker2.Dto
 {
-    public struct CourseDto
+    public struct CourseDto : IDto
     {
         private CourseDto(int id, string classCode, string className,
             ImmutableList<CourseSectionDto> courseSections)

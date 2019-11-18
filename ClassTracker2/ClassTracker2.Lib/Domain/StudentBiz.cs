@@ -14,9 +14,7 @@ namespace ClassTracker2.Lib
 
         public IResult GetById(int key)
            =>
-            // Validation is repeated to show two approaches. I prefer the second
             StartGetById(key)
-                .Apply(Helpers.ValidateInputAsKey)
                 .Validate(Helpers.ValidateKey)
                 .BindOutput<int, StudentDto>(repo.GetById);
     }

@@ -10,6 +10,6 @@ namespace ClassTracker2.Lib
         private static readonly DomainFactory domainFactory = new DomainFactory();
 
         public static IResult Get<TDto>(int key) 
-            => domainFactory.Get<TDto>().GetById(key);
+            => ((IDomain<int, TDto>)domainFactory.Get<TDto>()).GetById(key);
     }
 }

@@ -17,7 +17,7 @@ namespace Common
                this Result<TIn, TOut> result, Func<TIn, string> func)
         {
             var message = func(result.Input);
-            if (string.IsNullOrEmpty(message))
+            if (!string.IsNullOrEmpty(message))
             {
                 // all is well, just return result
                 return result;

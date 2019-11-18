@@ -23,13 +23,13 @@ namespace Common
             return t;
         }
 
-        public T Get<TKey>()
-            => Get(typeof(TKey));
+        public T Get<TDto>()
+            => Get(typeof(TDto));
 
-        public T Get(Type key)
-            => cache.TryGetValue(key, out T ret)
+        public T Get(Type dtoType)
+            => cache.TryGetValue(dtoType, out T ret)
                     ? ret
-                    : CreateCacheAndReturn(key);
+                    : CreateCacheAndReturn(dtoType);
 
     }
    

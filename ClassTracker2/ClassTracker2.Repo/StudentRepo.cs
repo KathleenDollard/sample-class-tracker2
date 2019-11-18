@@ -4,7 +4,7 @@ using System;
 
 namespace ClassTracker2.Repo
 {
-    public class StudentRepo : IRepo
+    public class StudentRepo :  IRepo<int, StudentDto>
     {
         public StudentDto GetById(int key)
           => key switch
